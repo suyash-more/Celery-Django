@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 3rd and custom party apps
-    'app1'
+    # 3rd / custom party apps
+    'django_celery_results',
+    'app1',
+    'app2'
 ]
 
 MIDDLEWARE = [
@@ -116,8 +118,29 @@ USE_L10N = True
 
 USE_TZ = True
 
+CELERY_RESULT_BACKEND = 'default'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'spacework789@gmail.com'
+EMAIL_HOST_PASSWORD = 'gqcmdvpnjaudixxa'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'spacework789@gmail.com'
+
+CELERY_TIMEZONE = "Indian/Maldives"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60

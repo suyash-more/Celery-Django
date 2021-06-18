@@ -1,3 +1,5 @@
 venv 
 .idea
-*.dump
+erl_crash.dump
+**/__pycache__
+.vscode
