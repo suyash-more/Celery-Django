@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 3rd and custom party apps
-    'app1'
+    'app1',
+    'django_celery_results',
+    'celery_progress',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CELERY_BROKER_URL = "< URL OF APP HERE (HEROKU REDIS) >"
+
+CELERY_ACCEPT__CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_TASK_BACKEND = "django-db"
