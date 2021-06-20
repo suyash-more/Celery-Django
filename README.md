@@ -2,6 +2,9 @@
 
 # **Configure your backend for Email Sending**
 
+### **Broker has been changed here to heroku-redis**
+***
+
 Command Reference
 ***
 
