@@ -9,6 +9,15 @@ Command Reference
 ```bash
     $ pip install celery
 ```
+## **Install flower**
+```bash
+    $ pip install flower
+```
+
+## **Install beat**
+```bash
+    $ pip install django-celery-beat
+```
 ## **Install RabbitMQ (Ubuntu Linux 20.04LTS)**
 ```bash
     $ sudo apt-get install rabbitmq-server
@@ -23,7 +32,7 @@ In our case it is :
 ```
 ####  **[Windows OS]**
 ```bash
-    $ celery -A core worker -l info --pool=solo
+    $ celery -A celeryDjango worker -l info --pool=solo
 ```
 ## **Run RabbitMQ (On Windows)**
 
@@ -43,5 +52,45 @@ or
 ```
 
 ### **Useful commands**
-    #Show message on completion of task
-        logger.info("Sent review email")
+Show message on completion of task
+
+```sh
+    $ logger.info("Sent review email")
+```
+### **In case if your flower does not work**
+Add the following lines to this file :
+```sh
+C:\django\yt-django-celery-series-intro-install-run-task\venv\lib\site-packages\tornado\platform\asyncio.py
+```
+Add these line at the start (in case flower does not start)
+
+```sh
+import sys
+
+if sys.platform == 'win32':
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+```
+
+## **Start Flower**
+```sh
+$ flower -A celeryDjango --port=5555
+```
+
+## **Django-celery-beat**
+
+This is normal startup for beat
+```sh
+$ celery -A celeryDjango beat -l INFO  # For deeper logs use DEBUG
+```
+
+Startup of beat with celery worker ( Embedded command )
+```sh
+$ celery -A celeryDjango worker -B -l INFO
+```
+You can also embed beat inside the worker by enabling the workers -B option
+
+## **Database scheduler**
+```sh
+$ celery -A celeryDjango beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+```
