@@ -122,7 +122,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-CELERY_RESULT_BACKEND = 'default'
+CELERY_RESULT_BACKEND = 'redis'
 
 CACHES = {
     'default': {
